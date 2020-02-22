@@ -1,0 +1,23 @@
+遍历查找指定的节点，然后删除。
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+void deleteNode(struct ListNode* node, int n){
+    struct ListNode *temp = node;
+    while(temp)
+    {
+        if(temp->val == n)
+        {
+            temp->val = temp->next->val;
+            temp->next = temp->next->next;
+            return ;
+        }
+        temp = temp->next;
+    }
+}
