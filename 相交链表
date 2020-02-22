@@ -1,0 +1,34 @@
+这道题比较有意思，题意是指两条相交的链表如何找到交点。
+这里可以使用移动速度一样的两个指针，通过相同的时间内，若到达的节点是同一个，则返回。
+具体细节看代码。
+(这里指针移动速度是一致的，
+关于指针移动速度不一致的问题。例如寻找中间节点，四分之三节点。这类问题可以用速度不一致的指针解决，也叫快慢指针。)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    struct ListNode heada;
+    struct ListNode headb;
+    heada.next = headA;
+    headb.next = headB;
+    if(heada.next==0||headb.next==0)
+    return NULL;
+
+    while(heada.next!=headb.next)
+    {
+        heada.next = heada.next->next;
+        headb.next = headb.next->next;
+        if(heada.next==0&&headb.next==0)
+        return NULL;
+        if(heada.next==0)
+        heada.next = headB;
+        if(headb.next==0)
+        headb.next = headA;
+    }
+    return heada.next;
+}
