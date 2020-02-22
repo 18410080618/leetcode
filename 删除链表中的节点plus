@@ -1,0 +1,31 @@
+这道题需要分第一个节点和中间节点判断，同时需要返回头节点。
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* deleteNode(struct ListNode* head, int val)
+{
+
+    if(head == NULL) return head;
+    if(head->val == val)
+    {
+        head = head->next;
+        return head;
+    }
+
+    struct ListNode *pre = head;
+    struct ListNode *cur = head->next;
+    while(cur->val != val)
+    {
+        pre = cur;
+        cur = cur->next;
+    }
+
+    pre->next = cur->next;
+    return head;
+}
