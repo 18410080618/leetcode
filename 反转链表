@@ -1,0 +1,25 @@
+较为简单，申请两个节点，将链表连接顺序颠倒即可。
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* reverseList(struct ListNode* head){
+    struct ListNode *pre,*cur;
+    pre = head;
+    cur = NULL;
+    while(pre!=0)
+    {
+        struct ListNode *tem = pre->next;
+        pre->next = cur;
+        cur = pre;
+        pre = tem;
+    }
+    return cur;
+
+    
+}
