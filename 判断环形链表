@@ -1,0 +1,23 @@
+利用快慢指针，如果当快慢指针相遇，则说明有环，代码如下。
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool hasCycle(struct ListNode *head) {
+     if (head == NULL || head->next ==NULL)
+        return false;
+   struct ListNode* slow = head;
+   struct ListNode* fast = head;
+    while (slow!=NULL && fast !=NULL &&fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+            return true;
+    }
+        return false;
+}
