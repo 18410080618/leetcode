@@ -1,0 +1,39 @@
+可以先通过遍历求链表长度，然后反转前一半或者后一半链表，最后比较两段链表。（也可以用快慢指针找到中间节点。）
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+bool isPalindrome(struct ListNode* head){
+    struct ListNode *cur,*pre=NULL;
+    cur = head;
+    int list_len = 0;
+    while(cur!=0)
+    {
+        cur = cur->next;
+        list_len++;
+    }
+    cur = head;
+    int n = 0;
+    while(n<(list_len/2))
+    {
+        head = head->next;
+        cur->next = pre;
+        pre = cur;
+        cur = head;
+        n++;
+    }
+    if(list_len%2!=0) head = head->next;
+    while ( head != NULL && pre != NULL){
+        if (head->val != pre->val){
+            return false;
+        }
+        head = head->next;
+        pre = pre->next;
+    }
+    return true;
+}
