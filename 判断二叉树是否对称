@@ -1,0 +1,24 @@
+和判断二叉树是否相同一样，申请一个函数，分别对根结点的左右子树进行遍历判断。
+代码如下：
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+bool isSame(struct TreeNode *l_root,struct TreeNode *r_root)
+{
+    if(l_root == NULL&&r_root == NULL) return true;
+    else if(l_root == NULL || r_root == NULL) return false;
+    else
+    return l_root->val==r_root->val&&
+            isSame(l_root->left,r_root->right)&&
+            isSame(l_root->right,r_root->left);
+}
+
+bool isSymmetric(struct TreeNode* root){
+    if(root == NULL) return true;
+    else return isSame(root->left,root->right);
+}
