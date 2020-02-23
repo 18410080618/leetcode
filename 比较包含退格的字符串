@@ -1,0 +1,30 @@
+利用两个指针，其中一个用来检查当前位置是否为‘#’，另一个用来保存退格后的字符串。
+代码如下：
+bool backspaceCompare(char * S, char * T){
+if (S == NULL && T == NULL) return true;
+    if (S == NULL) return false;
+    if (T == NULL) return false;
+    int i = 0;
+    int j = 0;
+    while (S[j]) 
+    {
+        if (S[j] == '#' ) 
+        {
+            if(i > 0) --i;
+        }
+        else S[i++] = S[j];
+        ++j;
+    } 
+    S[i] = 0;
+    i=j=0;
+    while (T[j]) {
+        if (T[j] == '#' ) 
+        {
+            if(i > 0)  --i;
+        }
+        else T[i++] = T[j];
+        ++j;
+    } 
+    T[i] = 0;
+    return !strcmp(S,T);
+}
