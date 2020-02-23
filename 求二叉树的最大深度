@@ -1,0 +1,23 @@
+求二叉树的最大深度是数据结构中非常基础的一道题，
+个人认为其核心思想就是求根结点子树的最大深度，然后再求根结点子树的最大深度。。。其实就是递归。(以后有时间写一写不用递归的算法)
+代码如下：
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+int maxDepth(struct TreeNode* root){
+    int l_len=0, r_len=0;
+    if(root == NULL) return 0;
+    else 
+    {
+        l_len = maxDepth(root->left);
+        r_len = maxDepth(root->right);
+        return l_len > r_len ? l_len + 1 :  r_len+1;
+    }
+    
+}
