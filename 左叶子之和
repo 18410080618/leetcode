@@ -1,0 +1,31 @@
+申请一个函数，对左叶子标为true，非左叶子标为false，递归求和
+代码如下：
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int sum(struct TreeNode *root,bool left)
+{
+    if(root == NULL) return 0;
+    else if(root->left==NULL&&root->right==NULL&&left) return root->val;
+    else if(root->left==NULL&&root->right==NULL&&!left) return 0;
+    else
+    {
+        int l_ans = sum(root->left,true);
+        int r_ans = sum(root->right,false);
+        return l_ans+r_ans;
+    }
+    
+}
+
+int sumOfLeftLeaves(struct TreeNode* root){
+    if(root == NULL) return 0;
+    if(root->left == NULL && root->right ==NULL) return 0;
+    int l_ans = sum(root->left,true);
+    int r_ans = sum(root->right,false);
+    return l_ans+r_ans;
+}
