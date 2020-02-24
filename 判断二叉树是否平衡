@@ -1,0 +1,28 @@
+判断二叉树平衡的问题是建立在求二叉树深度问题上的，分别求左右子树是否平衡，再求整体是否平衡。
+代码如下：
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+int depth(struct TreeNode* root)
+{
+    if(root == NULL) return 0;
+    else
+    {
+        int p1 = depth(root->left);
+        int p2 = depth(root->right);
+        return (p1>p2?p1:p2) + 1;
+    }
+}
+
+bool isBalanced(struct TreeNode* root){
+    if(root == NULL) return true;
+    else if(root->left == NULL&&root->right == NULL) return true;
+    else if(abs(depth(root->left) - depth(root->right))>1) return false;
+    else return isBalanced(root->left)&&isBalanced(root->right);
+}
