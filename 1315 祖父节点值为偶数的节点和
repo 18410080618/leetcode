@@ -1,0 +1,65 @@
+下面有两种方法：
+第二种方法是建立在第一种方法基础上，本质没有太大的区别。
+第一种：
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+    private:
+    int ans =0;
+    void dfs(TreeNode* grp,TreeNode* pren,TreeNode* grpson)
+    {
+        if(grpson == NULL) return ;
+        if(grp->val%2 == 0) ans += grpson->val;
+        dfs(pren,grpson,grpson->left);
+        dfs(pren,grpson,grpson->right);
+    }
+public:
+    int sumEvenGrandparent(TreeNode* root) {
+        if(root->left) 
+        {
+            dfs(root,root->left,root->left->left);
+            dfs(root,root->left,root->left->right);
+        }
+        if(root->right)
+        {
+            dfs(root,root->right,root->right->left);
+            dfs(root,root->right,root->right->right);
+        }
+        return ans;        
+    }
+};
+
+第二种：
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+    private:
+    int ans =0;
+    void dfs(int grpnum,int prenum,TreeNode* grpson)
+    {
+        if(grpson == NULL) return;
+        if(grpnum%2 == 0) ans += grpson->val;
+        dfs(prenum,grpson->val,grpson->left);
+        dfs(prenum,grpson->val,grpson->right);
+    }
+    
+public:
+    int sumEvenGrandparent(TreeNode* root) {
+        dfs(1,1,root);
+        return ans;
+    }
+};
