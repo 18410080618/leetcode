@@ -1,0 +1,31 @@
+实际上是对二叉树的每一条路径的遍历：
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+    int ans;
+    void dfs(TreeNode *root,int num)
+    {
+        num = num*10 + root->val;
+        if(root->left == NULL && root->right == NULL)
+        {
+            ans += num;
+        }
+        if(root->right) dfs(root->right,num);
+        if(root->left) dfs(root->left,num);
+    }
+public:
+    int sumNumbers(TreeNode* root) {
+        if(!root) return ans;
+        dfs(root,0);
+        return ans;
+
+    }
+};
