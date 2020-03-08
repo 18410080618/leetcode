@@ -1,0 +1,28 @@
+class Solution {
+    void dfs(vector<int>& coins, int amount,int pos,int count,int &ans)
+    {
+        if(amount == 0)
+        {
+            ans = min(ans,count);
+            return;
+        }
+        if(pos == coins.size())
+        {
+            return;
+        }
+        if(amount>0)
+        {
+            for(int k = amount/coins[pos];k>=0&&k+count<ans;k--)
+            {
+                dfs(coins,amount-k*coins[pos],pos+1,count+k,ans);
+            }
+        }
+    }
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.rbegin(),coins.rend());
+        int ans = INT_MAX;
+        dfs(coins,amount,0,0,ans);
+        return ans == INT_MAX?-1:ans;       
+    }
+};
