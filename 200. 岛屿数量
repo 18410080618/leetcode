@@ -1,0 +1,37 @@
+深度搜索时对遍历到的陆地置为0。
+
+class Solution {
+
+        void dfs(vector<vector<char>>& grid,int r,int c)
+        {
+            grid[r][c] = '0';
+            int row = grid.size();
+            int cols = grid[0].size();
+            
+            if(r-1>=0&&grid[r-1][c] == '1') dfs(grid,r-1,c);
+            if(r+1<row&&grid[r+1][c] == '1') dfs(grid,r+1,c);
+            if(c-1>=0&&grid[r][c-1] == '1') dfs(grid,r,c-1);
+            if(c+1<cols&&grid[r][c+1] == '1') dfs(grid,r,c+1);
+        }
+}
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int row = grid.size();
+        if(row == 0) return 0;
+        int cols = grid[0].size();
+        
+
+        int num = 0;
+        for(int i = 0;i<row;i++)
+        {
+            for(int j = 0;j<cols;j++)
+            if(grid[i][j] == '1')
+            {
+                ++num;
+                dfs(grid,i,j);
+            }
+        }
+        return num;
+
+    }
+};
