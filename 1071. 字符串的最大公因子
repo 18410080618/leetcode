@@ -1,0 +1,31 @@
+class Solution {
+    bool checked(string x,string str)
+    {
+        int len = str.length()/x.length();
+        string ans = "";
+        for(int i = 1;i<=len;i++)
+        {
+            ans += x;
+        }
+        if(ans == str)
+        return true;
+        else
+        return false;
+    }
+
+public:
+    string gcdOfStrings(string str1, string str2) {
+        int str1_len = str1.length();
+        int str2_len = str2.length();
+        for(int i = min(str1_len,str2_len);i>0;i--)
+        {
+            if(str1_len%i==0&&str2_len%i==0)
+            {
+                string x = str1.substr(0,i);
+                if(checked(x,str1)&&checked(x,str2))
+                return x;
+            }
+        }
+        return "";
+    }
+};
