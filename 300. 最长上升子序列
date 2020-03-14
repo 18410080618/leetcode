@@ -1,0 +1,51 @@
+第一次用动态规划，代码质量有点垃圾：
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+
+        int len = nums.size();
+        if(len == 0) return 0;
+        int map[len];
+        for(int z = 0;z<len;z++)
+        map[z] = 1;
+        for(int i = 0;i<len;i++)
+        {
+            int temp = 0;
+            for(int j = 0;j<i;j++)
+            {
+                if(nums[j]<nums[i])
+                {
+                    temp = max(temp,map[j]);
+                }
+                if(j+1 == i)
+                map[i]+=temp;
+            }          
+        }
+        return *max_element(map,map+len);
+    }
+};
+
+这个代码简洁一点，但是效率没有第一个高，效率非常低。
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int len = nums.size();
+        if(len == 0) return 0;
+
+        vector<int> dp(len,0);
+        for(int i = 0;i<len;i++)
+        {
+            dp[i]=1;
+            for(int j = 0;j<i;j++)
+            {
+                if(nums[j]<nums[i])
+                {
+                    dp[i] = max(dp[i],dp[j]+1);
+                }
+            }
+        }
+        return *max_element(dp.begin(),dp.end());
+    }
+};
