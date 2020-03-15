@@ -1,0 +1,21 @@
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
+        int sumx[n];
+        for(int i = 0;i<n;i++)
+        sumx[i] = 0;
+        sumx[0]=nums[0];
+        for(int i = 1;i<n;i++)
+        {
+            sumx[i] = nums[i];
+            int j = i-1;
+            if(sumx[i]+sumx[j]>sumx[i])
+                sumx[i]+=sumx[j];
+        }
+        return *max_element(sumx,sumx+n);
+    }
+};
