@@ -1,0 +1,25 @@
+利用双指针进行遍历：
+
+class Solution {
+public:
+    string compressString(string S) {
+        if(S.length() == 0) return "";
+        int i = 0,j=0;
+        string s;
+        char c = S[0];
+        while(j<=S.length())
+        {
+            while(c != S[j])
+            {
+                s += c ;
+                s += to_string(j-i);
+                i = j;
+                c = S[j];
+            }
+            j++;
+        }
+
+        return s.length()>=S.length()?S:s;
+
+    }
+};
