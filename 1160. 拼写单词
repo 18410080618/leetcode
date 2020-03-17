@@ -1,0 +1,37 @@
+利用哈希表存储：
+
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+        unordered_map<char,int> char_int;
+        for(char c : chars)
+        {
+            char_int[c]++;
+        }
+
+        int ans = 0;
+        for(string s : words)
+        {
+            unordered_map<char,int> s_int;
+            for(char c : s)
+            {
+                s_int[c]++;
+            }
+            bool is_big = true;
+            
+            for(char c : s)
+            {
+                if(char_int[c]<s_int[c])
+                {
+                    is_big = false;
+                    break;
+                }
+                
+            }
+            if(is_big)
+            ans += s.size();
+        }
+        return ans;
+
+    }
+};
