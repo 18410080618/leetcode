@@ -35,3 +35,42 @@ public:
 
     }
 };
+
+
+
+利用哈希表效率太低了，这里用数组进行存储：
+
+class Solution {
+    vector<int> count(string chars)
+    {
+        vector<int> p(26,0);
+        for(char c : chars)
+        {
+            p[c-'a']++;
+        }
+        return p;
+
+    }
+    bool is_ans(vector<int> chars_int,vector<int> s_int)
+    {
+        for(int i = 0;i<26;i++)
+        {
+            if(chars_int[i]<s_int[i])
+            return false;
+        }
+        return true;
+    }
+public:
+    int countCharacters(vector<string>& words, string chars) {
+
+        vector<int> chars_int = count(chars);
+        int ans = 0;
+        for(string s : words)
+        {
+            vector<int> s_int = count(s);
+            if(is_ans(chars_int,s_int))
+            ans += s.size();
+        }
+        return ans;
+    }
+};
