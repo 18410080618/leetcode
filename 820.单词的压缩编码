@@ -1,0 +1,25 @@
+方法一：消除后缀
+
+class Solution {
+public:
+    int minimumLengthEncoding(vector<string>& words) {
+        if(words.size() == 0) return 0;
+        unordered_set<string> myset(words.begin(),words.end());
+        for(string s : words)
+        {
+            for(int i = 1;i<s.size();i++)
+            {
+                myset.erase(s.substr(i));
+            }
+        }
+
+        int ans = 0;
+        for(string s : myset)
+        {
+            ans += s.size()+1;
+        }    
+        return ans;
+    }
+};
+
+方法二：字典树（以后来补充）
